@@ -76,7 +76,7 @@
 
 ---
 
-## What to submit:
+## submission:
 
-1. GitHub Repository Link:
-2. Live Site Link:
+1. GitHub Repository Link: https://github.com/axiomshuvo/ph04-jobtracker
+2. Live Site Link: https://axiomshuvo.github.io/ph04-jobtracker/

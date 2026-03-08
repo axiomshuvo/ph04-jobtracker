@@ -4,72 +4,116 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Job Application Tracker</title>
+
+    <!-- add tailwind cdn  -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- add fontawesome  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- add google font  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        font-family: "Inter", sans-serif;
+      }
+      .active {
+        background-color: #104df5;
+        color: #fff;
+      }
+      .textcolor {
+        color: #64748b;
+      }
+    </style>
   </head>
-  <body>
-    <h1>Simple JOb application Tracker</h1>
-    <div class="card w-96 bg-base-100 card-xs shadow-sm">
-      <div class="card-body">
-        <h2 class="card-title">Xsmall Card</h2>
-        <p>
-          A card component has a figure, a body part, and inside body there are
-          title and actions parts
-        </p>
-        <div class="justify-end card-actions">
-          <button class="btn btn-primary">Buy Now</button>
-        </div>
-      </div>
-    </div>
+  <body class="bg-[#eaf0f7]">
+    <div class="container mx-auto mb-10">
+      <section class="topstats">
+        <h2 class="text-4xl text-[#002C5C] py-10 font-semibold">
+          Job Application Tracker
+        </h2>
+        <div
+          class="stats grid grid-cols-1 md:grid-cols-3 gap-5 [&>div]:bg-white [&>div]:flex [&>div]:justify-center [&>div]:flex-col [&>div]:border [&>div]:border-amber-500 [&>div]:p-8 [&>div]:rounded-xl [&>div>h4]:uppercase [&>div>h4]:font-semibold [&>div>p]:text-2xl [&>div]:space-y-1"
+        >
+          <div class="card">
+            <h4>Total</h4>
+            <p class="">8</p>
+          </div>
 
-    <div class="card w-96 bg-base-100 card-sm shadow-sm">
-      <div class="card-body">
-        <h2 class="card-title">Small Card</h2>
-        <p>
-          A card component has a figure, a body part, and inside body there are
-          title and actions parts
-        </p>
-        <div class="justify-end card-actions">
-          <button class="btn btn-primary">Buy Now</button>
-        </div>
-      </div>
-    </div>
+          <div class="card">
+            <h4>Interview</h4>
+            <p class="text-green-500">0</p>
+          </div>
 
-    <div class="card w-96 bg-base-100 card-md shadow-sm">
-      <div class="card-body">
-        <h2 class="card-title">Medium Card</h2>
-        <p>
-          A card component has a figure, a body part, and inside body there are
-          title and actions parts
-        </p>
-        <div class="justify-end card-actions">
-          <button class="btn btn-primary">Buy Now</button>
+          <div class="card">
+            <h4>Rejected</h4>
+            <p class="text-red-500">8</p>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <div class="card w-96 bg-base-100 card-lg shadow-sm">
-      <div class="card-body">
-        <h2 class="card-title">Large Card</h2>
-        <p>
-          A card component has a figure, a body part, and inside body there are
-          title and actions parts
-        </p>
-        <div class="justify-end card-actions">
-          <button class="btn btn-primary">Buy Now</button>
+      </section>
+      <hr class="border-0 border-b-[0.1px] border-b-zinc-400 my-10" />
+      <section class="listed-job space-y-8">
+        <div class="flex justify-between items-center">
+          <span class="text-3xl font-semibold">Available Jobs</span>
+          <span class="text-xl"> 8 Jobs</span>
         </div>
-      </div>
-    </div>
-
-    <div class="card w-96 bg-base-100 card-xl shadow-sm">
-      <div class="card-body">
-        <h2 class="card-title">Xlarge Card</h2>
-        <p>
-          A card component has a figure, a body part, and inside body there are
-          title and actions parts
-        </p>
-        <div class="justify-end card-actions">
-          <button class="btn btn-primary">Buy Now</button>
+        <div
+          class="flex gap-2 [&>button]:w-30 [&>button]:p-2 [&>button]:p-2.5 [&>button]:cursor-pointer [&>button]:bg-white [&>button]:rounded-lg"
+        >
+          <button class="active">All</button>
+          <button>Interview</button>
+          <button>Rejected</button>
         </div>
-      </div>
+        <div class="list space-y-5">
+          <div class="singlejob p-8 bg-white rounded-xl relative">
+            <h3 class="text-2xl font-semibold">Mobile First Corp</h3>
+            <h4 class="text-2xl font-light mt-2 mb-4 textcolor">
+              React Native Developer
+            </h4>
+            <ul class="flex gap-2 list-inside list-disc textcolor mb-4">
+              <li>Remote</li>
+              <li>Full-time</li>
+              <li>$130,000 - $175,000</li>
+            </ul>
+            <button
+              class="px-5 py-2.5 cursor-pointer bg-[#EEF4FF] rounded-lg text-[#002C5C]"
+              type="button"
+            >
+              NOT APPLIED
+            </button>
+            <p class="mt-2.5 mb-6">
+              Create stunning web experiences for high-profile clients. Must
+              have portfolio and experience with modern web design trends.
+            </p>
+            <div
+              class="flex gap-4 [&>button]:w-30 [&>button]:p-2 [&>button]:p-2.5 [&>button]:border [&>button]:cursor-pointer [&>button]:rounded-lg [&>button]:font-semibold [&>button]:capitalize"
+            >
+              <button class="border-lime-500 text-lime-500" type="button">
+                interview
+              </button>
+              <button class="border-red-500 text-red-500" type="button">
+                Rejected
+              </button>
+            </div>
+            <i
+              class="absolute right-10 top-10 text-xl cursor-pointer fa-solid fa-trash-can"
+            ></i>
+          </div>
+        </div>
+      </section>
     </div>
   </body>
 </html>
