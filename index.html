@@ -50,17 +50,17 @@
         >
           <div class="card">
             <h4>Total</h4>
-            <p class="">8</p>
+            <p id="totalcount" class="totaljobs"></p>
           </div>
 
           <div class="card">
             <h4>Interview</h4>
-            <p class="text-green-500">0</p>
+            <p id="interview" class="text-green-500"></p>
           </div>
 
           <div class="card">
             <h4>Rejected</h4>
-            <p class="text-red-500">8</p>
+            <p id="rejected" class="text-red-500"></p>
           </div>
         </div>
       </section>
@@ -68,17 +68,17 @@
       <section class="listed-job space-y-8">
         <div class="flex justify-between items-center">
           <span class="text-3xl font-semibold">Available Jobs</span>
-          <span class="text-xl"> 8 Jobs</span>
+          <span id="totaljobs" class="text-xl totaljobs"> </span>
         </div>
         <div
-          class="flex gap-2 [&>button]:w-30 [&>button]:p-2 [&>button]:p-2.5 [&>button]:cursor-pointer [&>button]:bg-white [&>button]:rounded-lg"
+          class="jobfilter flex gap-2 [&>button]:w-30 [&>button]:p-2 [&>button]:p-2.5 [&>button]:cursor-pointer [&>button]:bg-white [&>button]:rounded-lg"
         >
           <button class="active">All</button>
           <button>Interview</button>
           <button>Rejected</button>
         </div>
-        <div class="list space-y-5">
-          <div class="singlejob p-8 bg-white rounded-xl relative">
+        <div id="joblist" class="joblist space-y-5">
+          <!-- <div class="singlejob p-8 bg-white rounded-xl relative">
             <h3 class="text-2xl font-semibold">Mobile First Corp</h3>
             <h4 class="text-2xl font-light mt-2 mb-4 textcolor">
               React Native Developer
@@ -101,7 +101,7 @@
             <div
               class="flex gap-4 [&>button]:w-30 [&>button]:p-2 [&>button]:p-2.5 [&>button]:border [&>button]:cursor-pointer [&>button]:rounded-lg [&>button]:font-semibold [&>button]:capitalize"
             >
-              <button class="border-lime-500 text-lime-500" type="button">
+              <button class=" interview-btn border-lime-500 text-lime-500" type="button">
                 interview
               </button>
               <button class="border-red-500 text-red-500" type="button">
@@ -109,11 +109,13 @@
               </button>
             </div>
             <i
-              class="absolute right-10 top-10 text-xl cursor-pointer fa-solid fa-trash-can"
+              class=" delete-btn absolute right-10 top-10 text-xl cursor-pointer fa-solid fa-trash-can"
             ></i>
-          </div>
+          </div> -->
         </div>
       </section>
     </div>
+    <script src="./assets/script.js"></script>
   </body>
 </html>
+``
