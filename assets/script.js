@@ -111,41 +111,112 @@ let data = [
 // Get all DOOM Element
 
 const jobList = document.getElementById("joblist");
-const totaljob = document.getElementById("totaljobs");
+const totalJob = document.getElementById("totaljobs");
 const totalCount = document.getElementById("totalcount");
 const interviewCount = document.getElementById("interviewcount");
 const rejectCount = document.getElementById("rejectcount");
 
 // for tracking tabs
 let currentTab = "all";
+const tabButtons = document.querySelectorAll(".jobfilter button");
+// console.log(tabButtons);
 
 // Update dashboard counts
 
 function updateDashBoard() {
-  let interCount = data.filter((job) => job.status === "interview").length;
-  let rejectCount = data.filter((job) => job.status === "interview").length;
+  const allJobCount = document.querySelectorAll(".singlejob");
+  const visibleJobCount = Array.from(allJobCount).filter(
+    (job) => job.style.display !== "none",
+  );
+  const interCount = document.querySelectorAll(
+    ".status-btn.text-lime-600",
+  ).length;
+  console.log(interCount);
+  const rejCount = document.querySelectorAll(".status-btn.text-red-600").length;
 
-  totaljob.innerHTML = `${data.length} Jobs`;
-  totalCount.innerHTML = data.length;
+  totalJob.innerHTML = allJobCount.length;
+  totalCount.innerHTML = `${visibleJobCount.length} Jobs`;
   interviewCount.innerHTML = interCount;
-  rejectCount.innerHTML = rejectCount;
+  rejectCount.innerHTML = rejCount;
 }
-updateDashBoard();
+
+// Current Tab Activation
+
+function tabActivation() {
+  const allJobs = document.querySelectorAll(".singlejob");
+  let hasVisible = false;
+
+  allJobs.forEach((singleJob) => {
+    const statusText = singleJob
+      .querySelector(".status-btn")
+      .textContent.toLowerCase();
+
+    if (currentTab === "all" || statusText === currentTab) {
+      singleJob.style.display = "block";
+      hasVisible = true;
+    } else {
+      singleJob.style.display = "none";
+    }
+    noJobCheck();
+  });
+}
+// No Job Template
+function noJobCheck() {
+  // remove old empty message if exists
+  const oldMsg = document.getElementById("nojobs");
+  if (oldMsg) oldMsg.remove();
+
+  const visiblejobs = [...document.querySelectorAll(".singlejob")].filter(
+    (singleJob) => singleJob.style.display === "block",
+  );
+
+  // if no job visible → show message
+
+  if (visiblejobs.length === 0) {
+    const noJobTemplate = document.createElement("div");
+    noJobTemplate.id = "nojobs";
+    noJobTemplate.className =
+      "bg-white rounded-xl p-12 flex flex-col items-center justify-center text-center gap-4";
+    noJobTemplate.innerHTML = `<i class="fa-regular fa-file-lines text-6xl text-blue-500 "></i>
+
+        <h3 class="text-2xl font-semibold text-gray-700">
+          No jobs available
+        </h3>
+
+        <p class="text-gray-500">
+          Check back soon for new job opportunities
+        </p>`;
+    jobList.appendChild(noJobTemplate);
+  }
+}
+
+// filtering tabs
+
+tabButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    tabButtons.forEach((elm) => elm.classList.remove("active"));
+    btn.classList.add("active");
+
+    currentTab = btn.textContent.toLocaleLowerCase();
+
+    tabActivation();
+    updateDashBoard();
+  });
+});
 
 // Rendering Single Jobs
 
-data.forEach((job) => {
-  const div = document.createElement("div");
+function singleJobs() {
+  // empty the joblist
+  jobList.innerHTML = "";
 
-  div.className = "singlejob p-8 bg-white rounded-xl relative";
+  data.forEach((job) => {
+    const div = document.createElement("div");
+    div.className = "singlejob p-8 bg-white rounded-xl relative";
 
-  div.innerHTML = `
+    div.innerHTML = `
     <h3 class="text-2xl font-semibold">${job.companyName}</h3>
-
-    <h4 class="text-2xl font-light mt-2 mb-4 textcolor">
-      ${job.position}
-    </h4>
-
+    <h4 class="text-2xl font-light mt-2 mb-4 textcolor">${job.position}</h4>
     <ul class="flex gap-2 list-inside list-disc textcolor mb-4">
       <li>${job.location}</li>
       <li>${job.type}</li>
@@ -179,39 +250,63 @@ data.forEach((job) => {
       class=" delete-btn absolute right-10 top-10 text-xl cursor-pointer fa-solid fa-trash-can"
     ></i>
   `;
-  jobList.appendChild(div);
-});
-
-// active interview & rejected btn
-
-const interviewBtn = document.querySelectorAll(".interview-btn");
-
-console.log(interviewBtn);
-
-interviewBtn.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    const jobCard = e.target.closest(".singlejob");
-
-    const statusBtn = jobCard.querySelector(".status-btn");
-
-    statusBtn.textContent = "INTERVIEW";
-    statusBtn.className =
-      "status-btn px-5 py-2.5 rounded-lg border border-lime-600 text-lime-600";
+    jobList.appendChild(div);
   });
-});
 
-const rejectBtn = document.querySelectorAll(".reject-btn");
+  statusHandlers();
+  tabActivation();
+  updateDashBoard();
+}
 
-console.log(rejectBtn);
+// handle status event on click on single job card
 
-rejectBtn.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    const jobCard = e.target.closest(".singlejob");
+function statusHandlers() {
+  const interviewBtn = document.querySelectorAll(".interview-btn");
 
-    const statusBtn = jobCard.querySelector(".status-btn");
+  //   console.log(interviewBtn);
 
-    statusBtn.textContent = "REJECTED";
-    statusBtn.className =
-      "status-btn px-5 py-2.5 rounded-lg border border-red-600 text-red-600";
+  interviewBtn.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const jobCard = e.target.closest(".singlejob");
+
+      const statusBtn = jobCard.querySelector(".status-btn");
+
+      statusBtn.textContent = "INTERVIEW";
+      statusBtn.className =
+        "status-btn px-5 py-2.5 rounded-lg border border-lime-600 text-lime-600";
+
+      tabActivation();
+      updateDashBoard();
+    });
   });
-});
+
+  const rejectBtn = document.querySelectorAll(".reject-btn");
+
+  //   console.log(rejectBtn);
+
+  rejectBtn.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const jobCard = e.target.closest(".singlejob");
+
+      const statusBtn = jobCard.querySelector(".status-btn");
+
+      statusBtn.textContent = "REJECTED";
+      statusBtn.className =
+        "status-btn px-5 py-2.5 rounded-lg border border-red-600 text-red-600";
+      tabActivation();
+      updateDashBoard();
+    });
+  });
+
+  document.querySelectorAll(".delete-btn").forEach((btn) => {
+    btn.onclick = (e) => {
+      const jobCard = e.target.closest(".singlejob");
+      jobCard.remove();
+      tabActivation();
+      updateDashBoard();
+    };
+  });
+}
+
+//
+singleJobs();
