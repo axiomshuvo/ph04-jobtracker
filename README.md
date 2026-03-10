@@ -14,7 +14,7 @@ See detailed answers here 👉 [answer.md](./answer.md)
 **Technology [purpose] :**
 
 - HTML [Structure ]
-- CSS (Vanilla/Tailwind/DaisyUI) [ Styling ]
+- CSS (Vanilla/Tailwind) [ Styling ]
 - JavaScript (Vanilla) [Application Logic]
 
 ---
