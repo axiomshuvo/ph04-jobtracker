@@ -108,40 +108,33 @@ let data = [
 // No jobs Availble
 // Check back soon for new Job Opportunities
 
+// Get all DOOM Element
+
 const jobList = document.getElementById("joblist");
-
 const totaljob = document.getElementById("totaljobs");
-const totalcount = document.getElementById("totalcount");
-const interview = document.getElementById("interview");
-const rejected = document.getElementById("rejected");
+const totalCount = document.getElementById("totalcount");
+const interviewCount = document.getElementById("interviewcount");
+const rejectCount = document.getElementById("rejectcount");
 
-let jobCount = 0;
-let interCount = 0;
-let rejectCount = 0;
+// for tracking tabs
+let currentTab = "all";
+
+// Update dashboard counts
+
+function updateDashBoard() {
+  let interCount = data.filter((job) => job.status === "interview").length;
+  let rejectCount = data.filter((job) => job.status === "interview").length;
+
+  totaljob.innerHTML = `${data.length} Jobs`;
+  totalCount.innerHTML = data.length;
+  interviewCount.innerHTML = interCount;
+  rejectCount.innerHTML = rejectCount;
+}
+updateDashBoard();
+
+// Rendering Single Jobs
 
 data.forEach((job) => {
-  //Total job count & append
-
-  jobCount++;
-
-  //   console.log(jobCount);
-  //   console.log(jobCount);
-
-  totaljob.innerHTML = `${jobCount} Jobs`;
-  totalcount.innerHTML = `${jobCount}`;
-
-  if (job.status === "interview") {
-    interCount++;
-  }
-  interview.innerHTML = `${interCount}`;
-
-  if (job.status === "rejected") {
-    rejectCount++;
-  }
-  rejected.innerHTML = `${rejectCount}`;
-
-  // content build and appended
-
   const div = document.createElement("div");
 
   div.className = "singlejob p-8 bg-white rounded-xl relative";
