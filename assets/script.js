@@ -90,25 +90,42 @@ let data = [
   },
 ];
 
-// select
+// Task list
+//
+// - total job - count
+//  Available Jobs ->
+//   Click on interview button on content
+//   - will add the data on Interview tab
+//   - add the status as Interview.
+//   - Will increase the the count of interview in Dashboard
+
+// - Clicking on Rejected button on the card
+//   - will add the data on Rejected tab
+//   - add the status as Rejected.
+//   - Will increase the the count of Rejected in Dashboard
+
+// - Enable toggle between Interview and rejected button(you can select Rejected button after clicking on Interview, and Interview button after clicking on Rejected button). It will change the tab and dashboard count also. It will show tab wise jobs count on the right.
+// No jobs Availble
+// Check back soon for new Job Opportunities
 
 const jobList = document.getElementById("joblist");
-
-let jobCount = 0;
-let interCount = 0;
-let rejectCount = 0;
 
 const totaljob = document.getElementById("totaljobs");
 const totalcount = document.getElementById("totalcount");
 const interview = document.getElementById("interview");
 const rejected = document.getElementById("rejected");
+
+let jobCount = 0;
+let interCount = 0;
+let rejectCount = 0;
+
 data.forEach((job) => {
   //Total job count & append
 
   jobCount++;
 
-  console.log(jobCount);
-  console.log(jobCount);
+  //   console.log(jobCount);
+  //   console.log(jobCount);
 
   totaljob.innerHTML = `${jobCount} Jobs`;
   totalcount.innerHTML = `${jobCount}`;
@@ -143,7 +160,7 @@ data.forEach((job) => {
     </ul>
 
     <button
-      class="px-5 py-2.5 cursor-pointer bg-[#EEF4FF] rounded-lg text-[#002C5C]"
+      class=" status-btn px-5 py-2.5 cursor-pointer bg-[#EEF4FF] rounded-lg text-[#002C5C]"
       type="button"
     >
       ${job.status.toUpperCase()}
@@ -154,7 +171,7 @@ data.forEach((job) => {
     </p>
 
     <div
-      class="flex gap-4 [&>button]:w-30 [&>button]:p-2.5 [&>button]:border [&>button]:cursor-pointer [&>button]:rounded-lg [&>button]:font-semibold [&>button]:capitalize"
+      class=" flex gap-4 [&>button]:w-30 [&>button]:p-2.5 [&>button]:border [&>button]:cursor-pointer [&>button]:rounded-lg [&>button]:font-semibold [&>button]:capitalize"
     >
       <button class="interview-btn border-lime-500 text-lime-500" type="button">
         interview
@@ -172,22 +189,36 @@ data.forEach((job) => {
   jobList.appendChild(div);
 });
 
-function allJobCount() {}
+// active interview & rejected btn
 
-// Task list
-//
-// - total job - count
-//  Available Jobs ->
-//   Click on interview button on content
-//   - will add the data on Interview tab
-//   - add the status as Interview.
-//   - Will increase the the count of interview in Dashboard
+const interviewBtn = document.querySelectorAll(".interview-btn");
 
-// - Clicking on Rejected button on the card
-//   - will add the data on Rejected tab
-//   - add the status as Rejected.
-//   - Will increase the the count of Rejected in Dashboard
+console.log(interviewBtn);
 
-// - Enable toggle between Interview and rejected button(you can select Rejected button after clicking on Interview, and Interview button after clicking on Rejected button). It will change the tab and dashboard count also. It will show tab wise jobs count on the right.
-// No jobs Availble
-// Check back soon for new Job Opportunities
+interviewBtn.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const jobCard = e.target.closest(".singlejob");
+
+    const statusBtn = jobCard.querySelector(".status-btn");
+
+    statusBtn.textContent = "INTERVIEW";
+    statusBtn.className =
+      "status-btn px-5 py-2.5 rounded-lg border border-lime-600 text-lime-600";
+  });
+});
+
+const rejectBtn = document.querySelectorAll(".reject-btn");
+
+console.log(rejectBtn);
+
+rejectBtn.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const jobCard = e.target.closest(".singlejob");
+
+    const statusBtn = jobCard.querySelector(".status-btn");
+
+    statusBtn.textContent = "REJECTED";
+    statusBtn.className =
+      "status-btn px-5 py-2.5 rounded-lg border border-red-600 text-red-600";
+  });
+});
