@@ -65,11 +65,6 @@ lerna-debug.log*
 # ==========================================================
 # IDE & Editors
 # ==========================================================
-.vscode/*
-!.vscode/settings.json
-!.vscode/extensions.json
-!.vscode/launch.json
-!.vscode/tasks.json
 
 .idea/
 
@@ -130,3 +125,7 @@ public/uploads/
 .Spotlight-V100
 .Trashes
 ._*
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
